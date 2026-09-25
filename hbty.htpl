@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İyi Ki Doğdun 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #111;
+    font-family: Arial, sans-serif;
+}
+
+.sahne {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Başlangıç butonu */
+
+#basla {
+    position: relative;
+    z-index: 20;
+    padding: 18px 35px;
+    border: none;
+    border-radius: 50px;
+    font-size: 22px;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255,255,255,.5);
+}
+
+/* Büyük yazı */
+
+#baslik {
+    position: absolute;
+    z-index: 5;
+    color: white;
+    font-size: clamp(40px, 10vw, 100px);
+    text-align: center;
+    opacity: 0;
+    transform: scale(.5);
+    transition: 2s;
+}
+
+#baslik.goster {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Fotoğraflar */
+
+#fotograflar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.foto {
+    position: absolute;
+    width: 180px;
+    height: 230px;
+    object-fit: cover;
+    padding: 8px;
+    background: white;
+    border-radius: 8px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 2s ease-in;
+}
+
+/* Fotoğraflar ortaya gelsin */
+
+.foto.gel {
+    opacity: 1;
+}
+
+/* Fotoğraflar uçsun */
+
+.foto.uc {
+    opacity: 0;
+}
+
+.foto:nth-child(1).uc {
+    transform: translate(-350px, -300px) rotate(-35deg);
+}
+
+.foto:nth-child(2).uc {
+    transform: translate(300px, -250px) rotate(30deg);
+}
+
+.foto:nth-child(3).uc {
+    transform: translate(-280px, 300px) rotate(25deg);
+}
+
+.foto:nth-child(4).uc {
+    transform: translate(350px, 280px) rotate(-30deg);
+}
+</style>
+</head>
+
+<body>
+
+<div class="sahne">
+
+    <button id="basla">Tıkla 🎁</button>
+
+    <h1 id="baslik">İYİ Kİ DOĞDUN 🎂</h1>
+
+    <div id="fotograflar">
+
+        <img src="foto1.jpg" class="foto">
+        <img src="foto2.jpg" class="foto">
+        <img src="foto3.jpg" class="foto">
+        <img src="foto4.jpg" class="foto">
+
+    </div>
+
+</div>
+
+<script>
+
+const buton = document.getElementById("basla");
+const fotograflar = document.querySelectorAll(".foto");
+const baslik = document.getElementById("baslik");
+
+buton.addEventListener("click", () => {
+
+    // Butonu kaldır
+    buton.style.display = "none";
+
+    // Fotoğrafları göster
+    fotograflar.forEach((foto, index) => {
+
+        setTimeout(() => {
+            foto.classList.add("gel");
+        }, index * 300);
+
+    });
+
+    // Biraz bekle, sonra uçur
+    setTimeout(() => {
+
+        fotograflar.forEach(foto => {
+            foto.classList.add("uc");
+        });
+
+    }, 2500);
+
+    // Yazıyı göster
+    setTimeout(() => {
+
+        baslik.classList.add("goster");
+
+    }, 3500);
+
+});
+
+</script>
+
+</body>
+</html>
